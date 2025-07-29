@@ -1,6 +1,0 @@
-Experiment,Depth,Metric,Value
-S3OLCI,50m,R2,0.41
-,,MSE,5.43e-07
-,,MAE,5.66e-04
-,,RMSE,7.12e-04
-,,MAPD,32.73
