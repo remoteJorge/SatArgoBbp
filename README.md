@@ -1,6 +1,6 @@
-# Ocean Modeling with Random Forest
+# Combining BioGeoChemical-Argo (BGC-Argo) floats and satellite observations for water column estimations of the particulate backscattering coefficient
 
-This project applies Random Forest regression to oceanographic data (GlobColor, Sentinel-3 OLCI, IOPs) for predicting variables at different depths and regions.
+This repository contains the code for the .
 
 ## Structure
 
@@ -9,6 +9,10 @@ This project applies Random Forest regression to oceanographic data (GlobColor, 
 - `notebooks/`: Experimentation and validation
 - `results/`: Outputs like plots, metrics, and figures
 
-## Example Plot
+## Oceanic regions
 
-![Random Forest performance](docs/img/Map.png)
+![Map](docs/img/Map.png)
+
+## Models Performance at 250 meters
+
+![Models_250](docs/img/250.png)
