@@ -1,0 +1,6 @@
+Experiment,Depth,Metric,Value
+S3IOPS,250m,R2,0.88
+,,MSE,4.7402e-09
+,,MAE,3.7544e-05
+,,RMSE,6.3561e-05
+,,MAPD,5.95

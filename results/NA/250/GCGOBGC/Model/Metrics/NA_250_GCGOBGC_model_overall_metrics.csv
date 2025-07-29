@@ -1,0 +1,6 @@
+Experiment,Depth,Metric,Value
+GCGOBGC,250m,R2,0.78
+,,MSE,7.0861e-08
+,,MAE,8.5087e-05
+,,RMSE,1.8163e-04
+,,MAPD,3.37
