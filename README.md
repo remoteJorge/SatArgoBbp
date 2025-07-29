@@ -11,8 +11,12 @@ This repository contains the code for the .
 
 ## Oceanic regions
 
-![Map](docs/img/Map.png)
+<div align="center">
+  <img src="docs/img/Map.png" alt="Map" width="80%"/>
+</div>
 
 ## Models Performance at 250 meters
 
-![Models_250](docs/img/250.png)
+<div align="center">
+  <img src="docs/img/250.jpg" alt="Model Performance 250m" width="80%"/>
+</div>
