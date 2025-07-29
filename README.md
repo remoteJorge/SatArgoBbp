@@ -28,7 +28,7 @@ The study is described in detail in:
 
 - **Model type**: Multi-output Random Forest Regressor
 - **Input features**:
-  - Satellite: OLCI reflectances (12 wavelengths), C2RCC IOPs (*apig, adet, agelb, bpart, bwit, atot, btot*)
+  - Sentinel-3 OLCI: reflectances at 12 wavelengths, C2RCC IOPs (*apig, adet, agelb, bpart, bwit, atot, btot*)
   - GlocColour: reflectances at 5 wavelengths
   - GlobalOcean: Sea Level Anomaly (SLA)
   - BGC-Argo Float profiles: temperature, salinity, density, spiciness (via PCA)
