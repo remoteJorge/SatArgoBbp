@@ -72,7 +72,7 @@ SatArgoBbp/
 │   ├── models/        # Model training and evaluation scripts
 │   ├── features/      # Feature preprocessing (PCA, scaling, transformations)
 │   └── utils/         # Plotting, export functions, I/O helpers
-├── datasets/          # Processed input datasets (excluded from Git)
+├── datasets/          # Processed input datasets (excluded from Git — contact us if interested)
 ├── notebooks/         # Experimentation and experiment comparison notebooks
 ├── results/           # Outputs: plots, metrics, figures
 ├── docs/
