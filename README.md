@@ -4,19 +4,12 @@ This repository contains the code, experiments, and results for estimating verti
 
 ## Related Publication
 
-The study is described in detail in the following paper:
+The study is described in detail in:
 
 > **Combining BGC-Argo floats and satellite observations for water column estimations of the particulate backscattering coefficient**  
 > Jorge García-Jiménez, Ana B. Ruescas, Julia Amorós-López, Raphaëlle Sauzède  
 > *EGUsphere (2025)*  
 > [🔗 Read the article](TODO)
-
-## Structure
-
-- `src/`: Modeling and utility functions
-- `datasets/`: Processed input datasets
-- `notebooks/`: Experimentation and validation
-- `results/`: Outputs like plots, metrics, and figures
 
 ## Regions of Interest
 
@@ -42,3 +35,37 @@ The study is described in detail in the following paper:
 <div align="center">
   <img src="docs/img/250.jpg" alt="Model Performance 250m" width="90%"/>
 </div>
+
+## Structure
+
+<pre>
+SatArgoBbp/
+├── src/              # Modeling and utility functions
+├── datasets/         # Processed input datasets (excluded from Git)
+├── notebooks/        # Experimentation and validation notebooks
+├── results/          # Outputs: plots, metrics, figures
+├── docs/
+│   └── img/          # Visuals for README and manuscript
+├── .gitignore        # Ignore large/raw or intermediate files
+├── README.md         # 
+└── requirements.txt  # Python dependencies (optional)
+</pre>
+
+## How to Cite
+
+If you use this repository, please cite our paper:
+
+### APA
+
+> García-Jiménez, J., Ruescas, A. B., Amorós-López, J., & Sauzède, R. (2025). *Combining BGC-Argo floats and satellite observations for water column estimations of the particulate backscattering coefficient*. EGUsphere. https://doi.org/10.5194/egusphere-2024-3942
+
+### BibTeX
+
+```bibtex
+@article{garcia-jimenez2025bbp,
+  author    = {García-Jiménez, Jorge and Ruescas, Ana B. and Amorós-López, Julia and Sauzède, Raphaëlle},
+  title     = {Combining BGC-Argo floats and satellite observations for water column estimations of the particulate backscattering coefficient},
+  journal   = {EGUsphere},
+  year      = {2025},
+  doi       = {10.5194/egusphere-2024-3942}
+}
