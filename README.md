@@ -21,7 +21,7 @@ The study is described in detail in:
 - Subtropical Gyres
 
 <div align="center">
-  <img src="docs/img/Map.png" alt="Map" width="90%"/>
+  <img src="docs/img/Map.png" alt="Map" width="100%"/>
 </div>
 
 ## Modeling Approach
@@ -41,7 +41,7 @@ The study is described in detail in:
 ## Model Performance – Deep Profiles (0–250 m)
 
 <div align="center">
-  <img src="docs/img/250.jpg" alt="Model Performance 250m" width="90%"/>
+  <img src="docs/img/250.jpg" alt="Model Performance 250m" width="100%"/>
 </div>
 
 ## How to Cite
