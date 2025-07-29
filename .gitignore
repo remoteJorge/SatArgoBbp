@@ -1,2 +1,5 @@
 # pixi environments
 .pixi
+
+# Ignore all contents inside data/
+datasets/*
