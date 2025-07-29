@@ -5,7 +5,7 @@ This repository contains the code for the .
 ## Structure
 
 - `src/`: Modeling and utility functions
-- `data/`: Processed input datasets
+- `datasets/`: Processed input datasets
 - `notebooks/`: Experimentation and validation
 - `results/`: Outputs like plots, metrics, and figures
 
