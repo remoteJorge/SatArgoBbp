@@ -1,0 +1,6 @@
+Experiment,Depth,Metric,Value
+S3OLCIBGC,250m,R2,0.53
+,,MSE,3.08e-09
+,,MAE,4.19e-05
+,,RMSE,5.32e-05
+,,MAPD,8.39

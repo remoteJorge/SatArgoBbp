@@ -3,3 +3,4 @@
 
 # Ignore all contents inside data/
 datasets/*
+!datasets/.gitkeep

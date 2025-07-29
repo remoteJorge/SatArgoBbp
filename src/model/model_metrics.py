@@ -39,7 +39,7 @@ def median_absolute_percentage_deviation(y_true, y_pred, multioutput=None):
 
 def overall_metrics(y_true, y_pred):
     return {
-        "R2": r2_score(y_true, y_pred),  
+        "R2": r2_score(np.log10(y_true), np.log10(y_pred)),  
         "MSE": mean_squared_error(y_true, y_pred),
         "MAE": mean_absolute_error(y_true, y_pred),
         "RMSE": root_mean_squared_error(y_true, y_pred),
@@ -72,7 +72,7 @@ def depth_metrics(y_true, y_pred, setup):
         pd.DataFrame: Metrics indexed by metric name, with one column per depth level (X1, X2, ...).
     """
     metrics = {
-        "R2": r2_score(y_true, y_pred, multioutput='raw_values'),
+        "R2": r2_score(np.log10(y_true),np.log10( y_pred), multioutput='raw_values'),
         "MSE": mean_squared_error(y_true, y_pred, multioutput='raw_values'),
         "MAE": mean_absolute_error(y_true, y_pred, multioutput='raw_values'),
         "RMSE": root_mean_squared_error(y_true, y_pred, multioutput='raw_values'),
