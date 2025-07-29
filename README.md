@@ -1,6 +1,6 @@
 # Combining BGC-Argo floats and satellite observations for water column estimations of the particulate backscattering coefficient
 
-This repository contains the code, experiments, and results for estimating the vertical distribution of the particulate backscattering (*Bbp*) in the upper water column of the ocean. The models integrate in situ measurements from BGC-Argo profiling floats with satellite-derived reflectances and Inherent Optical Properties (IOPs), retrieved from the Sentinel-3 OLCI sensor and the C2RCC processor.
+This repository contains the code, experiments, and results for estimating the vertical distribution of the particulate backscattering coefficient (*Bbp*) in the upper water column of the ocean. The models integrate in situ measurements from BGC-Argo profiling floats with satellite-derived reflectances and Inherent Optical Properties (IOPs), retrieved from the Sentinel-3 OLCI sensor and the C2RCC processor.
 
 The study analyzes how satellite-derived sea surface optical properties, when combined with BGC-Argo profiles, can be used to reconstruct the vertical structure of the *Bbp* in the upper 250 meters of the ocean. It builds on the SOCA2016 method developed by Sauzède et al. (2016)
 
