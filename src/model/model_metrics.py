@@ -127,7 +127,7 @@ def save_overall_validation_metrics(y_val_bbp, y_pred_val_bbp, setup, export_con
         return df
 
     # Save to disk
-    out_path = f"../Results/{setup.region}/{setup.depth}/{setup.experiment}/Validation/Metrics"
+    out_path = f"../results/{setup.region}/{setup.depth}/{setup.experiment}/Validation/Metrics"
     os.makedirs(out_path, exist_ok=True)
     csv_path = os.path.join(out_path, f"{setup.region}_{setup.depth}_{setup.experiment}_Val_overall_metrics.csv")
     df.to_csv(csv_path, index=False)
