@@ -2,7 +2,7 @@
 
 Estimating particulate backscattering coefficient (bbp) in the upper ocean using BGC-Argo floats and satellite observations.
 
-The study examines how satellite-derived sea surface optical properties, combined with BGC-Argo profiles, can be used to reconstruct the vertical structure of bbp throughout the upper 250 meters of the water column. It builds on the SOCA2016 method developed by Sauzède et al. (2016).
+The study examines how satellite-derived sea surface bio-optical properties, combined with BGC-Argo profiles, can be used to reconstruct the vertical structure of bbp throughout the upper 250 meters of the water column. It builds on the SOCA2016 method developed by Sauzède et al. (2016).
 
 Sauzède et al., 2016 — https://doi.org/10.1002/2015JC011408
 
