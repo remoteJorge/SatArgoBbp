@@ -62,7 +62,7 @@ If you use this repository, please cite our paper:
 }
 ```
 
-## Repository Structure
+## Project structure
 <pre>
 SatArgoBbp/
 ├── src/
@@ -85,7 +85,7 @@ SatArgoBbp/
 ├── datasets/                   # Processed input datasets (excluded from Git — contact us if interested)
 ├── results/                    # Saved metrics, plots, models and model outputs
 │
-├── scripts/ TO DO
+├── scripts/ (to do)            
 │   └── run_all_experiments.py  # Script to batch-run all experiments
 │
 ├── docs/
