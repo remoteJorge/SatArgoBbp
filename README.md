@@ -65,23 +65,39 @@ If you use this repository, please cite our paper:
 ```
 
 ## Repository Structure
-
 <pre>
 SatArgoBbp/
-├── src/              
-│   ├── models/        # Model training and evaluation scripts
-│   ├── features/      # Feature preprocessing (PCA, scaling, transformations)
-│   └── utils/         # Plotting, export functions, I/O helpers
-├── datasets/          # Processed input datasets (excluded from Git — contact us if interested)
-├── notebooks/         # Experimentation and experiment comparison notebooks
-├── results/           # Outputs: plots, metrics, figures
+├── src/
+│   ├── data_loader.py          # Load and preprocess dataset
+│   ├── feature_selector.py     # Feature selection by experiment type
+│   ├── model/
+│   │   ├── train.py            # Training pipeline
+│   │   └── model_metrics.py    # Evaluation metrics (R², MAE, Bias, etc.)
+│   ├── plotting/
+│   │   └── plot_utils.py       # Plotting functions for model performance and comparisons
+│   ├── evaluation/
+│   │   └── metrics_loader.py   # Load and aggregate metric CSVs
+│   └── utils.py                # Experiment setup, config classes, I/O helpers
+│
+├── notebooks/                  # Jupyter notebooks for running and analyzing experiments
+│   ├── 0_data_analysis.ypnb
+│   ├── 1_run_single_experiment.ipynb
+│   └── 2_experiments_analysis_plots.ipynb
+│
+├── datasets/                   # Processed input datasets (excluded from Git — contact us if interested)
+├── results/                    # Saved metrics, plots, model outputs (auto-generated)
+│
+├── scripts/ TO DO
+│   └── run_all_experiments.py  # Script to batch-run all experiments
+│
 ├── docs/
-│   └── img/           # Visuals for README and manuscript (TO DO)
-├── .gitignore         
+│   └── img/                    # Figures for README and manuscript
+│
+├── .gitignore
 ├── README.md
-└── pixi.toml          # Project environment and dependencies (managed with Pixi)
+├── pyproject.toml             # Project environment and dependencies (managed with Pixi)
+└── pixi.lock                  # Pixi lockfile
 </pre>
-
 ### How to clone the repository
 
 This project uses [Pixi](https://prefix.dev) for fully reproducible environment management.
