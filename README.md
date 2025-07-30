@@ -8,7 +8,7 @@ Sauzède et al., 2016 — https://doi.org/10.1002/2015JC011408
 
 ## Related Publication
 
-The study is described in detail in:
+Full methodology and results in:
 
 > **Combining BGC-Argo floats and satellite observations for water column estimations of the particulate backscattering coefficient**  
 > Jorge García-Jiménez, Ana B. Ruescas, Julia Amorós-López, Raphaëlle Sauzède  
