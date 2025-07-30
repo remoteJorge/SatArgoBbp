@@ -42,9 +42,23 @@ Full description, methodology and results in:
   <img src="docs/img/250.jpg" alt="Model Performance 250m" width="100%"/>
 </div>
 
-## How to Cite
+## Notebooks Overview
+| Notebook                             | Purpose                                                                |
+| ------------------------------------ | ---------------------------------------------------------------------  |
+| `0_data_analysis.ipynb`              | Quick exploration of datasets (Argo profiles, temporal distribution...)|
+| `1_run_single_experiment.ipynb`      | Run and validate a model for one region–depth–experiment               |
+| `2_experiments_analysis_plots.ipynb` | Load and compare performance metrics across multiple experiments       |
 
-If you use this repository, please cite our paper:
+### How to use
+
+1. Install the environment with Pixi (see below)
+2. Launch Jupyter
+
+```bash
+pixi run jupyter lab
+```
+
+## How to Cite
 
 ### APA
 
@@ -137,11 +151,7 @@ pixi shell
 To launch the Jupyter interface:
 
 ```bash
-jupyter notebook
+pixi run jupyter lab
 ```
 
-To run a model training TODO:
 
-```bash
-python src/models/train_rf.py
-```
