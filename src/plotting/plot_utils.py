@@ -5,6 +5,7 @@ import os
 import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+plt.style.use(['seaborn-v0_8-whitegrid'])
 
 def get_depth_plot_params(setup):
     depth_value = int(setup.depth)
@@ -363,3 +364,200 @@ def plot_validation_scatter(df_metrics, y_val_bbp, y_pred_val_bbp, setup, export
        fig_path = os.path.join(save_path, f"{setup.region}_{setup.depth}_{setup.experiment}_validation.pdf")
        plt.savefig(fig_path, dpi=300)
        plt.show()
+       
+       
+def plot_bgc_sat_experiments(
+    r2_depth, mae_depth, bias_depth, depth, export=True
+):
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from matplotlib.ticker import ScalarFormatter
+
+    mld_na=-36 
+    mld_stg=-50 
+
+    # Define depth-related parameters
+    if str(depth) == "50":
+        depth_range = np.arange(1, 52, 2)
+        yticks = (-1, -11, -21, -31, -41, -51)
+    elif str(depth) == "250":
+        depth_range = np.arange(1, 253, 2)
+        yticks = (-1, -51, -101, -151, -201, -250)
+    else:
+        raise ValueError("Unsupported depth value. Use '50' or '250'.")
+
+    # Formatter
+    formatter = ScalarFormatter()
+    formatter.set_scientific(True)
+    formatter.set_powerlimits((-3, 2))
+
+    fig, axes = plt.subplots(
+        1, 6, figsize=(16, 5), dpi=300,
+        gridspec_kw={'width_ratios': [1, 1, 0.5, 0.5, 0.5, 0.5]},
+        sharey=False
+    )
+
+    colors = {'NA': 'g', 'STG': '#1f77b4'}
+
+    # --- R² Plot ---
+    ax = axes[0]
+    ax.axhline(y=mld_stg, color=colors['STG'], linewidth=3, alpha=0.2, label='Mean STG MLD')
+    ax.axhline(y=mld_na, color=colors['NA'], linewidth=3, alpha=0.2, label='Mean NA MLD')
+    ax.plot(r2_depth["NA_S3OLCIBGC"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="--", linewidth=0.9, label="NA S3OLCIBGC")
+    ax.plot(r2_depth["NA_GCGOBGC"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="-", linewidth=0.9, label="NA GCGOBGC")
+    ax.plot(r2_depth["STG_S3OLCIBGC"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="--", linewidth=0.9, label="STG S3OLCIBGC")
+    ax.plot(r2_depth["STG_GCGOBGC"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="-", linewidth=0.9, label="STG GCGOBGC")
+    ax.set_xlabel("R\u00B2", fontsize=12)
+    ax.set_ylabel("Depth (m)", fontsize=12)
+    ax.set_yticks(yticks)
+    ax.tick_params(labelsize=10)
+    ax.legend(fontsize=8)
+
+    # --- MAE Plot ---
+    ax = axes[1]
+    ax.axhline(y=mld_stg, color=colors['STG'], linewidth=3, alpha=0.2)
+    ax.axhline(y=mld_na, color=colors['NA'], linewidth=3, alpha=0.2)
+    ax.set_yticklabels([])
+    ax.plot(mae_depth["NA_S3OLCIBGC"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="--", linewidth=0.9)
+    ax.plot(mae_depth["NA_GCGOBGC"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="-", linewidth=0.9)
+    ax.plot(mae_depth["STG_S3OLCIBGC"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="--", linewidth=0.9)
+    ax.plot(mae_depth["STG_GCGOBGC"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="-", linewidth=0.9)
+    ax.set_yticks(yticks)
+    ax.set_xlabel("MAE $(m^{-1})$", fontsize=12)
+    ax.tick_params(labelsize=10)
+    axes[1].xaxis.set_major_formatter(formatter)
+
+    # --- Bias bar plots ---
+    for i, (region, dataset) in enumerate([
+        ("NA", "S3OLCIBGC"), ("NA", "GCGOBGC"),
+        ("STG", "S3OLCIBGC"), ("STG", "GCGOBGC")
+    ]):
+        ax = axes[i + 2]
+        ax.barh(depth_range, bias_depth[f"{region}_{dataset}"], color=colors[region], alpha=0.6)
+        ax.set_yticklabels([])
+        ax.invert_yaxis()
+        ax.axvline(x=0, color='darkgrey', linestyle='--', linewidth=1)
+        ax.tick_params(labelsize=10)
+        ax.set_title(dataset, fontsize=11)
+        ax.xaxis.set_major_formatter(formatter)
+
+    # Auto-scale bias plot x-limits by region
+    for region, idxs in zip(["NA", "STG"], [(2, 3), (4, 5)]):
+        bias_values = np.concatenate([bias_depth[f"{region}_S3OLCIBGC"], bias_depth[f"{region}_GCGOBGC"]])
+        bias_min, bias_max = bias_values.min(), bias_values.max()
+        margin = 0.1 * (bias_max - bias_min)
+        xlim = (bias_min - margin, bias_max + margin)
+        axes[idxs[0]].set_xlim(xlim)
+        axes[idxs[1]].set_xlim(xlim)
+
+    fig.supxlabel('Bias $(m^{-1})$', fontsize=12, x=0.75, y=0.060)
+    fig.add_artist(plt.Line2D([0.505, 0.99], [0.105, 0.105],
+                              transform=fig.transFigure,
+                              color='darkgrey', linewidth=0.5))
+    plt.tight_layout()
+    if export:
+    
+    	outdir = f"../results/Comparisons/{depth}"
+    	os.makedirs(outdir, exist_ok=True)
+    	outfile = f"{outdir}/Comparison_{depth}_R2_MAE_Bias_sat_bgc.pdf"
+    	plt.savefig(outfile)
+    print(f"Figure saved to: {outfile}")
+    plt.show()
+
+def plot_sat_experiments(
+    r2_depth, mae_depth, bias_depth, depth, export=True
+):
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from matplotlib.ticker import ScalarFormatter
+
+    mld_na=-36 
+    mld_stg=-50 
+
+    # Define depth-related parameters
+    if str(depth) == "50":
+        depth_range = np.arange(1, 52, 2)
+        yticks = (-1, -11, -21, -31, -41, -51)
+    elif str(depth) == "250":
+        depth_range = np.arange(1, 253, 2)
+        yticks = (-1, -51, -101, -151, -201, -250)
+    else:
+        raise ValueError("Unsupported depth value. Use '50' or '250'.")
+
+    # Formatter
+    formatter = ScalarFormatter()
+    formatter.set_scientific(True)
+    formatter.set_powerlimits((-3, 2))
+
+    fig, axes = plt.subplots(
+        1, 6, figsize=(16, 5), dpi=300,
+        gridspec_kw={'width_ratios': [1, 1, 0.5, 0.5, 0.5, 0.5]},
+        sharey=False
+    )
+
+    colors = {'NA': 'g', 'STG': '#1f77b4'}
+
+    # --- R² Plot ---
+    ax = axes[0]
+    ax.axhline(y=mld_stg, color=colors['STG'], linewidth=3, alpha=0.2, label='Mean STG MLD')
+    ax.axhline(y=mld_na, color=colors['NA'], linewidth=3, alpha=0.2, label='Mean NA MLD')
+    ax.plot(r2_depth["NA_S3IOPS"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="--", linewidth=0.9, label="NA S3IOPS")
+    ax.plot(r2_depth["NA_S3OLCI"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="-", linewidth=0.9, label="NA S3OLCI")
+    ax.plot(r2_depth["STG_S3IOPS"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="--", linewidth=0.9, label="STG S3IOPS")
+    ax.plot(r2_depth["STG_S3OLCI"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="-", linewidth=0.9, label="STG S3OLCI")
+    ax.set_xlabel("R\u00B2", fontsize=12)
+    ax.set_ylabel("Depth (m)", fontsize=12)
+    ax.set_yticks(yticks)
+    ax.tick_params(labelsize=10)
+    ax.legend(fontsize=8)
+
+    # --- MAE Plot ---
+    ax = axes[1]
+    ax.axhline(y=mld_stg, color=colors['STG'], linewidth=3, alpha=0.2)
+    ax.axhline(y=mld_na, color=colors['NA'], linewidth=3, alpha=0.2)
+    ax.set_yticklabels([])
+    ax.plot(mae_depth["NA_S3IOPS"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="--", linewidth=0.9)
+    ax.plot(mae_depth["NA_S3OLCI"], -depth_range, color=colors['NA'], alpha=0.7, linestyle="-", linewidth=0.9)
+    ax.plot(mae_depth["STG_S3IOPS"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="--", linewidth=0.9)
+    ax.plot(mae_depth["STG_S3OLCI"], -depth_range, color=colors['STG'], alpha=0.7, linestyle="-", linewidth=0.9)
+    ax.set_yticks(yticks)
+    ax.set_xlabel("MAE $(m^{-1})$", fontsize=12)
+    ax.tick_params(labelsize=10)
+    axes[1].xaxis.set_major_formatter(formatter)
+
+    # --- Bias bar plots ---
+    for i, (region, dataset) in enumerate([
+        ("NA", "S3OLCI"), ("NA", "S3IOPS"),
+        ("STG", "S3OLCI"), ("STG", "S3IOPS")
+    ]):
+        ax = axes[i + 2]
+        ax.barh(depth_range, bias_depth[f"{region}_{dataset}"], color=colors[region], alpha=0.6)
+        ax.set_yticklabels([])
+        ax.invert_yaxis()
+        ax.axvline(x=0, color='darkgrey', linestyle='--', linewidth=1)
+        ax.tick_params(labelsize=10)
+        ax.set_title(dataset, fontsize=11)
+        ax.xaxis.set_major_formatter(formatter)
+
+    # Auto-scale bias plot x-limits by region
+    for region, idxs in zip(["NA", "STG"], [(2, 3), (4, 5)]):
+        bias_values = np.concatenate([bias_depth[f"{region}_S3OLCI"], bias_depth[f"{region}_S3IOPS"]])
+        bias_min, bias_max = bias_values.min(), bias_values.max()
+        margin = 0.1 * (bias_max - bias_min)
+        xlim = (bias_min - margin, bias_max + margin)
+        axes[idxs[0]].set_xlim(xlim)
+        axes[idxs[1]].set_xlim(xlim)
+
+    fig.supxlabel('Bias $(m^{-1})$', fontsize=12, x=0.75, y=0.060)
+    fig.add_artist(plt.Line2D([0.505, 0.99], [0.105, 0.105],
+                              transform=fig.transFigure,
+                              color='darkgrey', linewidth=0.5))
+    plt.tight_layout()
+    if export:
+    
+    	outdir = f"../results/Comparisons/{depth}"
+    	os.makedirs(outdir, exist_ok=True)
+    	outfile = f"{outdir}/Comparison_{depth}_R2_MAE_Bias_sat.pdf"
+    	plt.savefig(outfile)
+    print(f"Figure saved to: {outfile}")
+    plt.show()
