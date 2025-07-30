@@ -85,7 +85,7 @@ SatArgoBbp/
 │   └── 2_experiments_analysis_plots.ipynb
 │
 ├── datasets/                   # Processed input datasets (excluded from Git — contact us if interested)
-├── results/                    # Saved metrics, plots, model outputs (auto-generated)
+├── results/                    # Saved metrics, plots, models and model outputs
 │
 ├── scripts/ TO DO
 │   └── run_all_experiments.py  # Script to batch-run all experiments
@@ -95,7 +95,7 @@ SatArgoBbp/
 │
 ├── .gitignore
 ├── README.md
-├── pyproject.toml             # Project environment and dependencies (managed with Pixi)
+├── pixie.toml                 # Project environment and dependencies (managed with Pixi)
 └── pixi.lock                  # Pixi lockfile
 </pre>
 ### How to clone the repository
