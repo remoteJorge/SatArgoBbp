@@ -128,7 +128,7 @@ exec $SHELL
 ### Step 2 — Clone the Repository
 
 ```bash
-git clone git@github.com:XXXXXXXXX IPL
+git clone 
 cd SatArgoBbp
 ```
 ### Step 3 — Set Up the Environment
